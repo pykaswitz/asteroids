@@ -16,8 +16,12 @@ def main():
     dt = 0
     x = constants.SCREEN_WIDTH / 2
     y = constants.SCREEN_HEIGHT / 2
-    my_player = player.Player(x, y)
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    player.Player.containers = (updatable, drawable)
+    my_player = player.Player(x, y)
+    
     while True:
         for event in pygame.event.get():
             # This will check if the user has closed the window and exit the game loop if they do. It will make the window's close button work.
@@ -25,11 +29,13 @@ def main():
                 return
         screen.fill((0,0,0))
         # creates a window using screen obj and fills it solid black
-        my_player.draw(screen)
+        for sprite in drawable:
+            sprite.draw(screen)
         pygame.display.flip()
         clock.tick(60)
         dt = clock.tick(60) / 1000
         # sets screen refresh to 60fps and updates dt (delta time) from miliseconds to seconds
+        updatable.update(dt)
 
 
 if __name__ == "__main__":
