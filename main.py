@@ -6,6 +6,8 @@ import constants
 import player
 from asteroids import Asteroid
 import asteroidfield
+from circleshape import CircleShape
+import sys
 
 def main():
     print("Starting Asteroids!")
@@ -45,6 +47,10 @@ def main():
         dt = clock.tick(60) / 1000
         # sets screen refresh to 60fps and updates dt (delta time) from miliseconds to seconds
         updatable.update(dt)
+        for a in asteroid_g:
+            if my_player.collision(a):
+                print("Game over!")
+                sys.exit()
 
 
 if __name__ == "__main__":
