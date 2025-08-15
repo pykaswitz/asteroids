@@ -62,7 +62,7 @@ def main():
         for a in asteroid_g:
             for s in player_shot_g:
                 if a.collision(s):
-                    a.kill()
+                    a.split()
                     s.kill()
         # sets iterables to check for collision of asteroids and shots
 
